@@ -30,5 +30,6 @@
   "sign-in": "Sign in to your account",
   "or": "Or",
   "go-home": "go home",
-  "sign-in-with": "Sign in with"
+  "sign-in-with": "Sign in with",
+  "signed-in-user": "Signed in: "
 }

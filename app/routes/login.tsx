@@ -1,5 +1,17 @@
+import type { LoaderFunction } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
 import { Link } from '@remix-run/react'
-import { TFunction, useTranslation } from 'react-i18next'
+import type { Provider } from '@supabase/supabase-js'
+import { getUser } from '~/utils/session'
+import { useSignIn } from '~/utils/use-sign-in'
+import type { TFunction } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request)
+  if (user) return redirect('/')
+  return null
+}
 
 export default function LoginRoute() {
   const { t, ready } = useTranslation()
@@ -70,20 +82,22 @@ function ProviderButton({
   t,
 }: {
   children: React.ReactNode
-  provider: string
+  provider: Provider
   t: TFunction
 }) {
+  const { handleProviderSignIn } = useSignIn()
+
   return (
     <div>
-      <a
-        href='/'
+      <button
+        onClick={() => handleProviderSignIn(provider)}
         className='inline-flex w-full justify-center rounded-md border border-gray-300 dark:border-gray-600 dark:bg-black bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-800'
       >
         <span className='sr-only'>
           {t('sign-in-with')} {provider}
         </span>
         {children}
-      </a>
+      </button>
     </div>
   )
 }

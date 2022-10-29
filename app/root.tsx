@@ -15,6 +15,8 @@ import {
 } from '@remix-run/react'
 import { i18nCookie } from '~/i18n/config/cookie'
 import { getLocale, i18nRemix } from '~/i18n/i18n.server'
+import type { WindowEnvironment } from '~/utils/env.server'
+import { windowEnv } from '~/utils/env.server'
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { useChangeLanguage } from 'remix-i18next'
@@ -33,6 +35,7 @@ type LoaderData = {
   locale: string
   title: string
   ssrTheme: Theme | null
+  windowEnv: WindowEnvironment
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -44,7 +47,10 @@ export const loader: LoaderFunction = async ({ request }) => {
   const headers = new Headers()
   headers.set('Set-Cookie', await i18nCookie.serialize(locale))
 
-  return json({ locale, title, ssrTheme: themeSession.getTheme() }, { headers })
+  return json(
+    { locale, title, ssrTheme: themeSession.getTheme(), windowEnv },
+    { headers }
+  )
 }
 
 export const meta: MetaFunction = ({ data }) => ({
@@ -62,7 +68,7 @@ export const handle = {
 }
 
 function App() {
-  const { locale, ssrTheme } = useLoaderData<LoaderData>()
+  const { locale, ssrTheme, windowEnv } = useLoaderData<LoaderData>()
   const { i18n } = useTranslation()
   const [theme] = useTheme()
 
@@ -88,6 +94,11 @@ function App() {
         <ThemeBody ssrTheme={Boolean(ssrTheme)} />
         <ScrollRestoration />
         <LiveReload />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.env = ${JSON.stringify(windowEnv)}`,
+          }}
+        />
         <Scripts />
       </body>
     </html>

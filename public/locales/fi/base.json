@@ -30,5 +30,6 @@
   "sign-in": "Kirjaudu tilillesi",
   "or": "Tai",
   "go-home": "palaa kotisivulle",
-  "sign-in-with": "Kirjaudu sisään käyttäen"
+  "sign-in-with": "Kirjaudu sisään käyttäen",
+  "signed-in-user": "Kirjautuneena sisään: "
 }

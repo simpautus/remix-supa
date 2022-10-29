@@ -1,7 +1,12 @@
 import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Form, Link } from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { json } from '@remix-run/node'
+import { Form, Link, useLoaderData } from '@remix-run/react'
+import type { User } from '@supabase/supabase-js'
+import { getUser } from '~/utils/session'
 import { Theme, useTheme } from '~/utils/theme-provider'
+import { useSignOut } from '~/utils/use-sign-out'
 import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -12,9 +17,19 @@ const navigation = [
   { translationKey: 'menu.company', href: '/' },
 ]
 
-export default function IndexRoute() {
-  const [theme, setTheme] = useTheme()
+type LoaderData = {
+  user: User | null
+}
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request)
+  return json<LoaderData>({ user })
+}
+
+export default function IndexRoute() {
+  const { user } = useLoaderData<LoaderData>()
+  const [theme, setTheme] = useTheme()
+  const { signOut } = useSignOut()
   const { t, i18n, ready } = useTranslation()
 
   const toggleTheme = () => {
@@ -73,12 +88,21 @@ export default function IndexRoute() {
                       {t(item.translationKey)}
                     </Link>
                   ))}
-                  <Link
-                    to='/login'
-                    className='font-medium text-indigo-600 hover:text-indigo-500'
-                  >
-                    Log in
-                  </Link>
+                  {user ? (
+                    <button
+                      onClick={signOut}
+                      className='font-medium text-indigo-600 hover:text-indigo-500'
+                    >
+                      {t('logout')}
+                    </button>
+                  ) : (
+                    <Link
+                      to='/login'
+                      className='font-medium text-indigo-600 hover:text-indigo-500'
+                    >
+                      {t('login')}
+                    </Link>
+                  )}
                 </div>
               </nav>
             </div>
@@ -123,12 +147,21 @@ export default function IndexRoute() {
                       </Link>
                     ))}
                   </div>
-                  <Link
-                    to='/login'
-                    className='block w-full bg-gray-50 dark:bg-gray-900 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  >
-                    {t('login')}
-                  </Link>
+                  {user ? (
+                    <button
+                      onClick={signOut}
+                      className='block w-full bg-gray-50 dark:bg-gray-900 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    >
+                      {t('logout')}
+                    </button>
+                  ) : (
+                    <Link
+                      to='/login'
+                      className='block w-full bg-gray-50 dark:bg-gray-900 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    >
+                      {t('login')}
+                    </Link>
+                  )}
                 </div>
               </Popover.Panel>
             </Transition>
@@ -147,6 +180,12 @@ export default function IndexRoute() {
                 sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
                 fugiat veniam occaecat fugiat aliqua.
               </p>
+              {user && (
+                <p className='mt-3 text-sm text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-base md:mt-5 md:text-lg lg:mx-0 font-light'>
+                  {t('signed-in-user')}
+                  <span className='text-indigo-500'>{user.email}</span>
+                </p>
+              )}
               <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
                 <div className='rounded-md shadow'>
                   <Form method='get'>
