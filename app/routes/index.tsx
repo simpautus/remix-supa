@@ -1,24 +1,29 @@
 import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from '@remix-run/react'
+import { Form, Link } from '@remix-run/react'
 import { Theme, useTheme } from '~/utils/theme-provider'
 import { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const navigation = [
-  { name: 'Product', href: '/' },
-  { name: 'Features', href: '/' },
-  { name: 'Marketplace', href: '/' },
-  { name: 'Company', href: '/' },
+  { translationKey: 'menu.product', href: '/' },
+  { translationKey: 'menu.features', href: '/' },
+  { translationKey: 'menu.marketplace', href: '/' },
+  { translationKey: 'menu.company', href: '/' },
 ]
 
 export default function IndexRoute() {
   const [theme, setTheme] = useTheme()
+
+  const { t, i18n, ready } = useTranslation()
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
       prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
     )
   }
+
+  if (!ready) return null
 
   return (
     <div className='relative overflow-hidden bg-gray-50 dark:bg-gray-900'>
@@ -45,30 +50,27 @@ export default function IndexRoute() {
               >
                 <div className='flex flex-shrink-0 flex-grow items-center lg:flex-grow-0'>
                   <div className='flex w-full items-center justify-between md:w-auto'>
-                    <Link to='/'>
-                      <span className='sr-only'>Your Company</span>
-                      <img
-                        alt='Your Company'
-                        className='h-8 w-auto sm:h-10'
-                        src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-                      />
-                    </Link>
+                    <img
+                      alt='Your Company'
+                      className='h-8 w-auto sm:h-10'
+                      src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
+                    />
                     <div className='-mr-2 flex items-center md:hidden'>
                       <Popover.Button className='inline-flex items-center justify-center rounded-md bg-gray-50 dark:bg-gray-900 p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
-                        <span className='sr-only'>Open main menu</span>
+                        <span className='sr-only'>{t('menu-open')}</span>
                         <Bars3Icon className='h-6 w-6' aria-hidden='true' />
                       </Popover.Button>
                     </div>
                   </div>
                 </div>
                 <div className='hidden md:ml-10 md:block md:space-x-8 md:pr-4'>
-                  {navigation.map((item) => (
+                  {navigation.map((item, index) => (
                     <Link
-                      key={item.name}
+                      key={index}
                       to={item.href}
                       className='font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-50'
                     >
-                      {item.name}
+                      {t(item.translationKey)}
                     </Link>
                   ))}
                   <Link
@@ -105,19 +107,19 @@ export default function IndexRoute() {
                     </div>
                     <div className='-mr-2'>
                       <Popover.Button className='inline-flex items-center justify-center rounded-md bg-gray-50 dark:bg-gray-900 p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
-                        <span className='sr-only'>Close main menu</span>
+                        <span className='sr-only'>{t('menu-close')}</span>
                         <XMarkIcon className='h-6 w-6' aria-hidden='true' />
                       </Popover.Button>
                     </div>
                   </div>
                   <div className='space-y-1 px-2 pt-2 pb-3'>
-                    {navigation.map((item) => (
+                    {navigation.map((item, index) => (
                       <Link
-                        key={item.name}
+                        key={index}
                         to={item.href}
                         className='block rounded-md px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 hover:text-gray-900 dark:hover:text-gray-50 dark:hover:bg-gray-900'
                       >
-                        {item.name}
+                        {t(item.translationKey)}
                       </Link>
                     ))}
                   </div>
@@ -125,7 +127,7 @@ export default function IndexRoute() {
                     to='/login'
                     className='block w-full bg-gray-50 dark:bg-gray-900 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100 dark:hover:bg-gray-800'
                   >
-                    Log in
+                    {t('login')}
                   </Link>
                 </div>
               </Popover.Panel>
@@ -135,31 +137,40 @@ export default function IndexRoute() {
           <main className='mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28'>
             <div className='sm:text-center lg:text-left'>
               <h1 className='text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl md:text-6xl'>
-                <span className='block xl:inline'>The most amazing</span>{' '}
+                <span className='block xl:inline'>{t('hero.title.1')}</span>{' '}
                 <span className='block text-indigo-600 xl:inline'>
-                  page title
+                  {t('hero.title.2')}
                 </span>
               </h1>
               <p className='mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0'>
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-                lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-                fugiat aliqua.
+                {t('hero.body')} anim aute id magna aliqua ad ad non deserunt
+                sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
+                fugiat veniam occaecat fugiat aliqua.
               </p>
               <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
                 <div className='rounded-md shadow'>
-                  <Link
-                    to='/login'
-                    className='flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg'
-                  >
-                    Log in
-                  </Link>
+                  <Form method='get'>
+                    <input
+                      name='lng'
+                      value={i18n.resolvedLanguage === 'en' ? 'fi' : 'en'}
+                      type='hidden'
+                    />
+                    <button
+                      type='submit'
+                      className='flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg'
+                    >
+                      {i18n.resolvedLanguage === 'en'
+                        ? 'Suomeksi'
+                        : 'In English'}
+                    </button>
+                  </Form>
                 </div>
                 <div className='mt-3 sm:mt-0 sm:ml-3'>
                   <button
                     onClick={toggleTheme}
                     className='flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg'
                   >
-                    {theme === Theme.DARK ? 'Light theme' : 'Dark theme'}
+                    {t(`theme.long.${theme === Theme.DARK ? 'light' : 'dark'}`)}
                   </button>
                 </div>
               </div>

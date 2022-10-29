@@ -1,10 +1,34 @@
 {
   "meta.title": "Hello, World!",
-  "intro": "Introduciton",
-  "intro.body": "This document provides a guide to help with the important task of choosing the correct Apple.",
-  "intro.img.alt": "Colored candy worms",
-  "option.title.1": "Change theme",
-  "option.title.2": "Change language",
-  "option.title.3": "Enable/Disable Javascript",
-  "option.3.label": "Disable Javascript"
+  "menu": {
+    "product": "Product",
+    "features": "Features",
+    "marketplace": "Marketplace",
+    "company": "Company"
+  },
+  "menu-close": "Close main menu",
+  "menu-open": "Open main menu",
+  "hero": {
+    "title": {
+      "1": "The most amazing",
+      "2": "page title"
+    },
+    "body": "The following in english"
+  },
+  "login": "Login",
+  "logout": "Logout",
+  "theme": {
+    "short": {
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "long": {
+      "dark": "Dark theme",
+      "light": "Light theme"
+    }
+  },
+  "sign-in": "Sign in to your account",
+  "or": "Or",
+  "go-home": "go home",
+  "sign-in-with": "Sign in with"
 }

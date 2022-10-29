@@ -1,10 +1,34 @@
 {
-  "meta.title": "Terve, maailma!!",
-  "intro": "Esittely",
-  "intro.body": "Tämä dokkari liirum laarum.",
-  "intro.img.alt": "Colored candy worms",
-  "option.title.1": "Change theme",
-  "option.title.2": "Change language",
-  "option.title.3": "Enable/Disable Javascript",
-  "option.3.label": "Disable Javascript"
+  "meta.title": "Hello, World!",
+  "menu": {
+    "product": "Tuote",
+    "features": "Ominaisuudet",
+    "marketplace": "Kauppa",
+    "company": "Yritys"
+  },
+  "menu-close": "Sulje valikko",
+  "menu-open": "Avaa valikko",
+  "hero": {
+    "title": {
+      "1": "Kaikista mahtavin",
+      "2": "sivun otsikko"
+    },
+    "body": "Suomeksi seuraavaa"
+  },
+  "login": "Kirjaudu",
+  "logout": "Poistu",
+  "theme": {
+    "short": {
+      "dark": "Tumma",
+      "light": "Vaalea"
+    },
+    "long": {
+      "dark": "Tumma teema",
+      "light": "Vaalea teema"
+    }
+  },
+  "sign-in": "Kirjaudu tilillesi",
+  "or": "Tai",
+  "go-home": "palaa kotisivulle",
+  "sign-in-with": "Kirjaudu sisään käyttäen"
 }

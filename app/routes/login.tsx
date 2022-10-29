@@ -1,6 +1,11 @@
 import { Link } from '@remix-run/react'
+import { TFunction, useTranslation } from 'react-i18next'
 
-export default function Example() {
+export default function LoginRoute() {
+  const { t, ready } = useTranslation()
+
+  if (!ready) return null
+
   return (
     <div className='flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8'>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
@@ -10,22 +15,22 @@ export default function Example() {
           alt='Your Company'
         />
         <h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50'>
-          Sign in to your account
+          {t('sign-in')}
         </h2>
         <p className='mt-6 text-center text-sm text-gray-600 dark:text-gray-400'>
-          Or{' '}
+          {t('or')}{' '}
           <Link
             to='/'
             className='font-medium text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400'
           >
-            go home
+            {t('go-home')}
           </Link>
         </p>
       </div>
 
       <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
         <div className='mt-6 grid grid-cols-2 gap-3'>
-          <ProviderButton provider='facebook'>
+          <ProviderButton provider='facebook' t={t}>
             <svg
               className='h-5 w-5'
               aria-hidden='true'
@@ -39,7 +44,7 @@ export default function Example() {
               />
             </svg>
           </ProviderButton>
-          <ProviderButton provider='github'>
+          <ProviderButton provider='github' t={t}>
             <svg
               className='h-5 w-5'
               aria-hidden='true'
@@ -62,9 +67,11 @@ export default function Example() {
 function ProviderButton({
   children,
   provider,
+  t,
 }: {
   children: React.ReactNode
   provider: string
+  t: TFunction
 }) {
   return (
     <div>
@@ -72,7 +79,9 @@ function ProviderButton({
         href='/'
         className='inline-flex w-full justify-center rounded-md border border-gray-300 dark:border-gray-600 dark:bg-black bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-800'
       >
-        <span className='sr-only'>Sign in with {provider}</span>
+        <span className='sr-only'>
+          {t('sign-in-with')} {provider}
+        </span>
         {children}
       </a>
     </div>
