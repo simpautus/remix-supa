@@ -1,0 +1,31 @@
+/*
+ * File: normal.css
+ * Project: *
+ * Created: *
+ * Author: Mehdi Rashadatjou
+ * -----
+ * Copyright 2021 - 2022, ©*
+ * -----
+ */
+
+/* Devices small then 625px */
+
+:root {
+  /* Spaces */
+  --space-x-large: 2rem;
+  --space-large: 1rem;
+  --space-medium: 0.75rem;
+  --space-normal: 0.5rem;
+  --space-small: 0.25rem;
+  --space-tiny: 0.125rem;
+
+  /* Text size */
+  --size-txt-large: 3.75rem;
+  --size-txt-medium: 2.5rem;
+  --size-txt-normal: 1.875rem;
+  --size-txt-small: 1.25rem;
+  --size-txt-tiny: 1.125rem;
+
+  /* Animations */
+  --animation-duration: 0.1s;
+}

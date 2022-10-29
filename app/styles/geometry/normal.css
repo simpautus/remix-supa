@@ -1,0 +1,31 @@
+/*
+ * File: medium.css
+ * Project: *
+ * Created: *
+ * Author: Mehdi Rashadatjou
+ * -----
+ * Copyright 2021 - 2022, ©*
+ * -----
+ */
+
+/* Devices between 625px and 1024px */
+
+:root {
+  /* Spaces */
+  --space-x-large: 2rem;
+  --space-large: 1rem;
+  --space-medium: 0.75rem;
+  --space-normal: 0.5rem;
+  --space-small: 0.25rem;
+  --space-tiny: 0.125rem;
+
+  /* Text size */
+  --size-txt-large: 4.25rem;
+  --size-txt-medium: 3rem;
+  --size-txt-normal: 2rem;
+  --size-txt-small: 1.55rem;
+  --size-txt-tiny: 1.325rem;
+
+  /* Animations */
+  --animation-duration: 0.1s;
+}

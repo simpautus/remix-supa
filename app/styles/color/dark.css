@@ -1,0 +1,50 @@
+/*
+ * File: dark.css
+ * Project: *
+ * Created: *
+ * Author: Mehdi Rashadatjou
+ * -----
+ * Copyright 2021 - 2022, ©*
+ * -----
+ */
+
+/*
+ * keyword:
+ * 1. bg (background)
+ * 2. txt (text/font)
+ * 3. act (action/button/link)
+ * 4. theme (specific theme color)
+ * 5. focus (element focus color)
+ * 6. selection (text selection color)
+ * 7. highlight (text highlight color)
+ *
+ * level:
+ * 1. main
+ * 2. secondary
+ * 3. tertiary
+ */
+
+:root {
+  /* Background */
+  --color-bg-main: #232323;
+  --color-bg-secondary: #f7f7f7;
+  --color-bg-body: #21211e;
+  --color-bg-border: #66717c;
+
+  /* Text */
+  --color-txt-main: #ededed;
+  --color-txt-secondary: #c2c1c1;
+  --color-txt-muted: #a9b1ba;
+  --color-txt-bright: #fff;
+
+  /* Actions */
+  --color-act-main: #06efb1;
+  --color-act-secondary: #ff570a;
+
+  /* Other */
+  --color-theme-main: #f6d728;
+  --color-focus-main: rgb(6, 239, 177, 0.67);
+  --color-selection-main: #312b0a;
+  --color-highlight-main: #01ffbb;
+  --color-image-filter: grayscale(10%);
+}
