@@ -22,8 +22,8 @@ import { useTranslation } from 'react-i18next'
 import { useChangeLanguage } from 'remix-i18next'
 
 import styles from './styles/app.css'
+import type { Theme } from './utils/theme-provider'
 import {
-  Theme,
   ThemeBody,
   ThemeHead,
   ThemeProvider,
@@ -78,18 +78,14 @@ function App() {
     <html
       lang={locale}
       dir={i18n.dir()}
-      className={classNames(
-        theme,
-        'h-full',
-        theme === Theme.DARK ? 'bg-gray-900' : 'bg-gray-50'
-      )}
+      className={classNames(theme, 'h-full')}
     >
       <head>
         <Meta />
         <Links />
         <ThemeHead ssrTheme={Boolean(ssrTheme)} />
       </head>
-      <body className='h-full'>
+      <body className='h-full bg-gray-50 dark:bg-gray-900'>
         <Outlet />
         <ThemeBody ssrTheme={Boolean(ssrTheme)} />
         <ScrollRestoration />
