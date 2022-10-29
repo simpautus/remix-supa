@@ -1,6 +1,5 @@
 {
-  "name": "remix-supa-oauth",
-  "private": true,
+  "name": "remix-supa",
   "sideEffects": false,
   "scripts": {
     "start": "remix-serve build",
