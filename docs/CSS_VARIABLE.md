@@ -14,7 +14,7 @@ root: {
 }
 ```
 
-### __Type:__
+### **Type:**
 
 Fundamentally this describes what the variable should be used for.
 
@@ -22,11 +22,11 @@ Fundamentally this describes what the variable should be used for.
 2. space
 3. size
 
-### __Keyword:__
+### **Keyword:**
 
 A relevant keyword describing what the variable is for.
 
-### __Level (Optional):__
+### **Level (Optional):**
 
 Level/Importance/Priority of the variable (give it a bit of context).
 
