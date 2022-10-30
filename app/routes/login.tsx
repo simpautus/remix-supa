@@ -19,7 +19,7 @@ export default function LoginRoute() {
   if (!ready) return null
 
   return (
-    <div className='flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8'>
+    <div className='flex min-h-full flex-col justify-center py-12 px-4 sm:px-6 lg:px-8'>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
         <img
           className='mx-auto h-12 w-auto'
@@ -40,7 +40,7 @@ export default function LoginRoute() {
         </p>
       </div>
 
-      <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
+      <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-6 lg:px-8'>
         <div className='mt-6 grid grid-cols-2 gap-3'>
           <ProviderButton provider='facebook' t={t}>
             <svg

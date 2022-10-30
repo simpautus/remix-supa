@@ -181,10 +181,22 @@ export default function IndexRoute() {
                 fugiat veniam occaecat fugiat aliqua.
               </p>
               {user && (
-                <p className='mt-3 text-sm text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-base md:mt-5 md:text-lg lg:mx-0 font-light'>
-                  {t('signed-in-user')}
-                  <span className='text-indigo-500'>{user.email}</span>
-                </p>
+                <>
+                  <p className='mt-3 text-sm text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-base md:mt-5 md:text-lg lg:mx-0 font-light'>
+                    {t('signed-in-user')}
+                    <span className='text-indigo-500'>{user.email}</span>
+                  </p>
+                  <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
+                    <div className='rounded-md shadow'>
+                      <button
+                        onClick={signOut}
+                        className='flex w-full items-center justify-center rounded-md border border-indigo-700 dark:border-indigo-100 px-8 py-3 text-base font-medium dark:text-indigo-100 text-indigo-700 hover:bg-indigo-700 hover:text-indigo-100 dark:hover:border-indigo-700 md:py-4 md:px-10 md:text-lg'
+                      >
+                        {t('logout')}
+                      </button>
+                    </div>
+                  </div>
+                </>
               )}
               <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
                 <div className='rounded-md shadow'>
