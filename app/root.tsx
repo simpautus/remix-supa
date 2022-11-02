@@ -13,25 +13,29 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
-import { i18nCookie } from '~/i18n/config/cookie'
-import { getLocale, i18nRemix } from '~/i18n/i18n.server'
 import type { WindowEnvironment } from '~/utils/env.server'
 import { windowEnv } from '~/utils/env.server'
-import classNames from 'classnames'
-import { useTranslation } from 'react-i18next'
-import { useChangeLanguage } from 'remix-i18next'
-
-import styles from './styles/app.css'
-import type { Theme } from './utils/theme-provider'
 import {
   ThemeBody,
   ThemeHead,
   ThemeProvider,
   useTheme,
-} from './utils/theme-provider'
-import { getThemeSession } from './utils/theme.server'
+} from '~/utils/theme-provider'
+import type { Theme } from '~/utils/theme-provider'
+import { getThemeSession } from '~/utils/theme.server'
+import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
+import { useChangeLanguage } from 'remix-i18next'
 
-type LoaderData = {
+import { i18nCookie } from './i18n/config/cookie'
+import { getLocale, i18nRemix } from './i18n/i18n.server'
+import styles from './styles/app.css'
+
+export const links: LinksFunction = () => {
+  return [{ rel: 'stylesheet', href: styles }]
+}
+
+export type LoaderData = {
   locale: string
   title: string
   ssrTheme: Theme | null
@@ -47,7 +51,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   const headers = new Headers()
   headers.set('Set-Cookie', await i18nCookie.serialize(locale))
 
-  return json(
+  return json<LoaderData>(
     { locale, title, ssrTheme: themeSession.getTheme(), windowEnv },
     { headers }
   )
@@ -58,10 +62,6 @@ export const meta: MetaFunction = ({ data }) => ({
   title: data.title,
   viewport: 'width=device-width,initial-scale=1',
 })
-
-export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles }]
-}
 
 export const handle = {
   i18n: 'base',
@@ -78,7 +78,7 @@ function App() {
     <html
       lang={locale}
       dir={i18n.dir()}
-      className={classNames(theme, 'h-full')}
+      className={classNames('h-full', theme)}
     >
       <head>
         <Meta />
@@ -89,13 +89,13 @@ function App() {
         <Outlet />
         <ThemeBody ssrTheme={Boolean(ssrTheme)} />
         <ScrollRestoration />
-        <LiveReload />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.env = ${JSON.stringify(windowEnv)}`,
           }}
         />
         <Scripts />
+        <LiveReload />
       </body>
     </html>
   )

@@ -28,7 +28,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function IndexRoute() {
   const { user } = useLoaderData<LoaderData>()
-  const [theme, setTheme] = useTheme()
+  const [, setTheme] = useTheme()
   const { signOut } = useSignOut()
   const { t, i18n, ready } = useTranslation()
 
@@ -221,7 +221,10 @@ export default function IndexRoute() {
                     onClick={toggleTheme}
                     className='flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg'
                   >
-                    {t(`theme.long.${theme === Theme.DARK ? 'light' : 'dark'}`)}
+                    <span className='hidden dark:inline'>
+                      {t('theme.long.light')}
+                    </span>
+                    <span className='dark:hidden'>{t('theme.long.dark')}</span>
                   </button>
                 </div>
               </div>
