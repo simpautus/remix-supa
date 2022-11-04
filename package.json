@@ -15,8 +15,8 @@
     "validate": "npm-run-all --parallel type-check format-check lint build"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.3",
-    "@heroicons/react": "^2.0.12",
+    "@headlessui/react": "^1.7.4",
+    "@heroicons/react": "^2.0.13",
     "@remix-run/node": "*",
     "@remix-run/react": "*",
     "@remix-run/serve": "*",
@@ -38,7 +38,7 @@
     "@remix-run/eslint-config": "*",
     "@tailwindcss/forms": "^0.5.3",
     "@types/i18next-fs-backend": "^1.1.2",
-    "@types/react": "^18.0.24",
+    "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "autoprefixer": "^10.4.13",
     "concurrently": "^7.5.0",
