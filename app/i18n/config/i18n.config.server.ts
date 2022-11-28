@@ -5,7 +5,7 @@ import type { RemixI18NextOption } from 'remix-i18next'
 
 import { i18nCookie } from './cookie'
 
-const remixConfig: RemixI18NextOption = {
+export const i18nRemixConfig: RemixI18NextOption = {
   detection: {
     cookie: i18nCookie,
     supportedLanguages: ['en', 'fi'],
@@ -20,12 +20,9 @@ const remixConfig: RemixI18NextOption = {
   backend: Backend,
 }
 
-const serverConfig: InitOptions = {
-  supportedLngs: remixConfig.detection.supportedLanguages,
-  fallbackLng: remixConfig.detection.fallbackLanguage,
-  ...remixConfig.i18next,
+export const i18nServerConfig: InitOptions = {
+  supportedLngs: i18nRemixConfig.detection.supportedLanguages,
+  fallbackLng: i18nRemixConfig.detection.fallbackLanguage,
+  ...i18nRemixConfig.i18next,
   react: { useSuspense: false },
 }
-
-export const i18nServerConfig = serverConfig
-export const i18nRemixConfig = remixConfig
