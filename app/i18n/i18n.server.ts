@@ -1,6 +1,6 @@
 import type { EntryContext } from '@remix-run/node'
 import { createInstance } from 'i18next'
-import Backend from 'i18next-fs-backend'
+import FsBackend from 'i18next-fs-backend'
 import { initReactI18next } from 'react-i18next'
 import { RemixI18Next } from 'remix-i18next'
 
@@ -17,7 +17,7 @@ export async function i18nInterceptor(request: Request, context: EntryContext) {
 
   await i18n
     .use(initReactI18next)
-    .use(Backend)
+    .use(FsBackend)
     .init({
       ...i18nServerConfig,
       lng: language,

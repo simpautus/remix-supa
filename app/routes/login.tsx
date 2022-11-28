@@ -4,7 +4,7 @@ import { Link } from '@remix-run/react'
 import type { Provider } from '@supabase/supabase-js'
 import { getUser } from '~/utils/session'
 import { useSignIn } from '~/utils/use-sign-in'
-import type { TFunction } from 'react-i18next'
+import type { TFunction } from 'i18next'
 import { useTranslation } from 'react-i18next'
 
 export const loader: LoaderFunction = async ({ request }) => {
